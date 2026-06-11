@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Mim — MAC Nail Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="/logo_mac_nail.png">
+  <style>
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--rosa);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 2rem 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -27px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--rosa);
+      border: 3px solid var(--branco);
+      box-shadow: 0 0 0 2px var(--rosa);
+    }
+
+    .timeline-year {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+      margin-bottom: .25rem;
+    }
+
+    .timeline-item h3 {
+      margin-bottom: .3rem;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .value-card {
+      background: var(--branco);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 12px var(--sombra);
+    }
+
+    .value-card .emoji {
+      font-size: 2rem;
+      margin-bottom: .5rem;
+    }
+
+    .value-card h3 {
+      font-size: 1rem;
+      margin-bottom: .3rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body class="pagina-interna">
+
+    <nav class="nav" role="navigation" aria-label="Menu principal">
+      <div class="nav-inner">
+        <a class="nav-logo" href="index.html">MAC Nail Designer</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="servicos.html">Serviços & Preços</a></li>
+          <li><a href="sobre.html" class="active">Sobre Mim</a></li>
+          <li><a href="portfolio.html">Portfólio</a></li>
+          <li><a href="cuidados.html">Cuidados</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+
+    <section class="page-wrapper"
+      style="background: linear-gradient(160deg, var(--rosa-claro), var(--lilas-claro)); padding-top:64px; padding-bottom:64px;">
+      <div class="container" style="display:flex; align-items:center; gap:60px; flex-wrap:wrap;">
+
+
+        <div class="owner-photo-wrap" style="--foto-url: url('/maria-3.jpeg'); width:300px;">
+          <div class="owner-photo" style="--grad-cor: var(--rosa-claro);">
+            <div class="owner-photo-placeholder">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex:1; min-width:260px;">
+          <p class="section-label">Conheça a profissional</p>
+          <h1>Maria Aparecida</h1>
+          <div class="divider"></div>
+          <p style="font-size:1.05rem; margin-bottom:1rem;">
+            Muito prazer, me chamo Maria Aparecida, trabalho com manicure à mais de 20 anos, me especializei em nail
+            design e alongamentos em 2019, e desde então tenho me dedicado a oferecer um atendimento personalizado,
+            focado na saúde e beleza das unhas de cada cliente.
+          </p>
+          <p>
+            Minha paixão é realçar a beleza natural de cada pessoa, criando designs únicos que refletem sua
+            personalidade e estilo. Meu compromisso é proporcionar uma experiência acolhedora, onde cada detalhe é
+            pensado para o seu conforto e satisfação. Adoro conhecer as histórias por trás de cada cliente e transformar
+            suas ideias em arte nas unhas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAJETÓRIA -->
+    <section class="page-wrapper" style="background: var(--branco);">
+      <div class="container"
+        style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; flex-wrap:wrap; align-items:start;">
+        <div>
+          <p class="section-label">Minha trajetória</p>
+          <h2 class="section-title">Um caminho construído com paixão</h2>
+          <div class="divider"></div>
+          <p style="margin-bottom:2rem;">
+            Iniciei minha jornada no mundo da beleza há mais de duas décadas, quando descobri minha paixão por cuidar
+            das unhas e realçar a beleza natural das pessoas. Desde então, tenho me dedicado a aprimorar minhas
+            habilidades e conhecimentos, buscando sempre oferecer o melhor para minhas clientes. Minha trajetória é
+            marcada por momentos de aprendizado, superação e muita dedicação, que me levaram a abrir meu próprio estúdio
+            e conquistar a confiança de uma clientela fiel e satisfeita.
+          </p>
+
+          <!-- LINHA DO TEMPO -->
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <p class="timeline-year">2006</p>
+              <h3>Início da Jornada</h3>
+              <p> Aos 17 comecei a trabalhar como manicure como passatempo e forma de sustento.</p>
+            </div>
+
+            <div class="timeline-item">
+              <p class="timeline-year">2015</p>
+              <h3>Aprofundamento</h3>
+              <p>Comecei a meespecializar em seviços como nail art e estilos diferentes de unha, como babyboomer, além
+                de estudar e realizar cursos sobre pedicure.</p>
+            </div>
+
+            <div class="timeline-item">
+              <p class="timeline-year">2019</p>
+              <h3>Inovação</h3>
+              <p>Durante a Pandemia, busquei me atualizar e me especializei em alongamentos em gel e Nail Design
+                avançado, onde estou focando até os dias atuais. Em meados de 2020 abri meu próprio salão de nail
+                design.</p>
+            </div>
+
+            <div class="timeline-item">
+              <p class="timeline-year">Hoje</p>
+              <h3>Atualmente</h3>
+              <p>Hoje posso dizer com orgulho que conquistei com muito esforço, uma clientela fiel e incrível, além de
+                meu próprio espaço, que busco evoluir a cada dia.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div class="owner-photo-wrap" style="--foto-url: url('/acredite.png'); width:100%;">
+            <div class="owner-photo">
+              <div class="owner-photo-placeholder">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALORES -->
+    <section class="page-wrapper" style="background: var(--creme);">
+      <div class="container">
+        <p class="section-label" style="text-align:center;">O que me guia</p>
+        <h2 class="section-title" style="text-align:center;">Meus valores</h2>
+        <div class="values-grid">
+
+          <div class="value-card">
+            <div class="emoji">🌿</div>
+            <h3>Excelência e Naturalidade</h3>
+            <p>Acreditamos que o alongamento perfeito é aquele que ninguém diz que é artificial. Nos dedicamos a
+              entregar unhas com estrutura fina, simetria impecável e acabamento ultra natural, respeitando sempre a
+              saúde da sua unha biológica.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="emoji">💖</div>
+            <h3>Biossegurança e Saúde</h3>
+            <p>Sua saúde é nossa prioridade absoluta. Seguimos protocolos rigorosos de higiene, utilizando materiais
+              100% descartáveis e ferramentas de metal esterilizadas em autoclave de nível hospitalar. Aqui, a beleza
+              caminha lado a lado com a segurança.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="emoji">🎓</div>
+            <h3>Personalização e Autoestima</h3>
+            <p>Suas mãos comunicam quem você é. Por isso, não fazemos atendimentos em série. Cada formato, cor e nail
+              art é planejado para combinar com o seu estilo, a sua rotina e ressaltar a sua identidade, transformando o
+              atendimento em um verdadeiro momento de pausa e auto-estima.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="emoji">✨</div>
+            <h3>Inovação e Qualidade Premium</h3>
+            <p>O mercado de Nail Design evolui constantemente, e nós acompanhamos cada passo. Trabalhamos exclusivamente
+              com produtos regulamentados de alta linha e técnicas atualizadas. Isso garante maior durabilidade aos
+              procedimentos, brilho prolongado e zero descolamentos.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="page-wrapper" style="background: var(--lilas-claro); text-align:center;">
+      <div class="container" style="max-width:600px;">
+        <h2>Vamos nos conhecer?</h2>
+        <p style="margin: 1rem 0 2rem;">
+          Adoraria te receber e conversar sobre o que você deseja. Me chama no WhatsApp!
+        </p>
+        <a href="https://wa.me/5599981635627" class="btn btn-primary" target="_blank" rel="noopener">
+          💬 Falar no WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <footer class="page-wrapper">
+      <div class="container">
+        <p class="nav-logo">MAC Nail Designer</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="servicos.html">Serviços & Preços</a></li>
+          <li><a href="sobre.html">Sobre Mim</a></li>
+          <li><a href="portfolio.html">Portfólio</a></li>
+          <li><a href="cuidados.html">Cuidados</a></li>
+        </ul>
+        <h6>📍 Rua Benedito Leite, 120 - Porto Franco/MA</h6>
+        <h6>&copy; 2026 MAC Nail Designer. Todos os direitos reservados.</h6>
+        <h6>Desenvolvido por Diego Macedo e Eduardo Tatsuo.</h6>
+      </div>
+    </footer>
+
+    <script src="nav.js"></script>
+    <script>
+      /* layout responsivo para a seção de trajetória */
+      const twoCol = document.querySelector('section[style*="grid"] .container');
+      if (twoCol) {
+        function adaptGrid() {
+          twoCol.style.gridTemplateColumns = window.innerWidth < 800 ? '1fr' : '1fr 1fr';
+        }
+        adaptGrid();
+        window.addEventListener('resize', adaptGrid);
+      }
+    </script>
+  </body>
+
+</html>

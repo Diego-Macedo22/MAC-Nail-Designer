@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuidados — MAC Nail Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/logo_mac_nail.png">
+    <style>
+        /* ── ACCORDION ── */
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+        }
+
+        .acc-item {
+            background: var(--branco);
+            border-radius: var(--radius-sm);
+            box-shadow: 0 2px 12px var(--sombra);
+            overflow: hidden;
+        }
+
+        .acc-header {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 1.1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--texto);
+            gap: 1rem;
+        }
+
+        .acc-header .acc-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--rosa-claro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+            transition: background .3s;
+        }
+
+        .acc-header .acc-arrow {
+            flex-shrink: 0;
+            transition: transform .3s;
+            color: var(--texto-suave);
+            font-size: 1.1rem;
+        }
+
+        .acc-item.open .acc-arrow {
+            transform: rotate(180deg);
+        }
+
+        .acc-item.open .acc-header .acc-icon {
+            background: var(--rosa);
+        }
+
+        .acc-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease;
+        }
+
+        .acc-body-inner {
+            padding: 0 1.5rem 1.25rem;
+            color: var(--texto-suave);
+            font-size: .95rem;
+            line-height: 1.75;
+        }
+
+        .acc-body-inner ul {
+            margin: .5rem 0 0 1rem;
+        }
+
+        .acc-body-inner li {
+            margin-bottom: .4rem;
+        }
+
+        /* ── CATEGORIAS DE CUIDADO ── */
+        .care-section {
+            margin-bottom: 3rem;
+        }
+
+        .care-cat-label {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--rosa-claro);
+            color: var(--texto);
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: .4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+
+        /* ── ALERTA/DESTAQUE ── */
+        .alerta {
+            border-left: 4px solid var(--rosa);
+            background: var(--rosa-claro);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .alerta p {
+            color: var(--texto);
+            font-size: .95rem;
+        }
+
+        .alerta strong {
+            font-weight: 700;
+        }
+
+        /* ── CARDS COM FOTO LATERAL ── */
+        .care-tip-card {
+            background: var(--branco);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 16px var(--sombra);
+            display: flex;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            align-items: stretch;
+        }
+
+        /* foto 1:1 estilo instagram na lateral */
+        .care-tip-photo {
+            width: 160px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            background-color: var(--lilas);
+            position: relative;
+        }
+
+        /* degradê decorativo na foto lateral */
+        .care-tip-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent 60%, var(--branco) 100%);
+        }
+
+        .care-tip-photo-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: #9b8ea0;
+            font-size: .7rem;
+            text-align: center;
+            padding: .5rem;
+            z-index: 1;
+        }
+
+        .care-tip-photo-placeholder svg {
+            width: 28px;
+            height: 28px;
+            stroke: #9b8ea0;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .care-tip-content {
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        .care-tip-content h3 {
+            margin-bottom: .4rem;
+        }
+
+        @media (max-width: 580px) {
+            .care-tip-card {
+                flex-direction: column;
+            }
+
+            .care-tip-photo {
+                width: 100%;
+                height: 180px;
+            }
+
+            .care-tip-photo::after {
+                background: linear-gradient(to bottom, transparent 60%, var(--branco) 100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <body class="pagina-interna">
+
+        <nav class="nav" role="navigation" aria-label="Menu principal">
+            <div class="nav-inner">
+                <a class="nav-logo" href="index.html">MAC Nail Designer</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="servicos.html">Serviços & Preços</a></li>
+                    <li><a href="sobre.html">Sobre Mim</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                    <li><a href="cuidados.html" class="active">Cuidados</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+
+
+        <section class="page-wrapper"
+            style="background: linear-gradient(135deg, var(--menta-claro), var(--creme)); padding-top:64px; padding-bottom:48px;">
+            <div class="container">
+                <p class="section-label">Para durar mais e ficar mais bonito</p>
+                <h1>Cuidados</h1>
+                <div class="divider"></div>
+                <p style="max-width:560px; font-size:1.05rem;">
+                    O resultado do seu atendimento começa na cadeira, mas continua em casa.
+                    Siga estas orientações para aproveitar ao máximo cada serviço.
+                </p>
+            </div>
+        </section>
+
+
+        <section class="page-wrapper" style="background: var(--branco);">
+            <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+
+
+                <div>
+                    <p class="section-label">Dúvidas frequentes</p>
+                    <h2 class="section-title">O que você precisa saber sobre alongamentos e esmaltação em gel</h2>
+                    <div class="divider"></div>
+
+
+                    <div class="accordion" id="accordion">
+
+                        <div class="acc-item open">
+                            <button class="acc-header" aria-expanded="true">
+                                <span class="acc-icon" aria-hidden="true">💧</span>
+                                <span style="flex:1">Posso molhar após o procedimento?</span>
+                                <span class="acc-arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <div class="acc-body">
+                                <div class="acc-body-inner">
+                                    <p>Sim, pode molhar sem medo! Diferente do esmalte comum que seca no ar e pode
+                                        borrar, o gel sai da cabine LED/UV 100% seco e curado. Você já sai do
+                                        atendimento pronta para pegar as chaves na bolsa ou lavar as mãos. O único
+                                        cuidado é evitar banhos longos e muito quentes ou entrar em piscinas/mar nas
+                                        primeiras 24 horas, pois o calor extremo prolongado pode, raramente, afetar a
+                                        fixação inicial na unha natural.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="acc-item">
+                            <button class="acc-header" aria-expanded="false">
+                                <span class="acc-icon" aria-hidden="true">☀️</span>
+                                <span style="flex:1">Posso me expor ao sol ou usar câmaras de bronzeamento?</span>
+                                <span class="acc-arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <div class="acc-body">
+                                <div class="acc-body-inner">
+                                    <p>Pode sim, mas com moderação e proteção. O sol e os raios UV não vão descolar o
+                                        seu gel, mas a exposição intensa e prolongada (como passar o dia na praia) ou o
+                                        uso de cabines de bronzeamento podem amarelar esmaltes claros ou o top coat
+                                        (selante). Dica de ouro: aplique protetor solar nas mãos e passe um óleo de
+                                        cutícula antes de se expor, isso cria uma barreira protetora que mantém o brilho
+                                        perfeito.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="acc-item">
+                            <button class="acc-header" aria-expanded="false">
+                                <span class="acc-icon" aria-hidden="true">💆</span>
+                                <span style="flex:1">Quais produtos de beleza ou de limpeza posso usar no dia a
+                                    dia?</span>
+                                <span class="acc-arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <div class="acc-body">
+                                <div class="acc-body-inner">
+                                    <p>Produtos comuns de beleza (cremes hidratantes, óleos corporais e shampoos) estão
+                                        liberados. No entanto, você deve ficar longe de Acetona (use apenas removedores
+                                        sem acetona se precisar tirar um esmalte comum por cima do gel). Para a limpeza
+                                        da casa, produtos fortes como água sanitária, cloro e desinfetantes atacam a
+                                        composição do gel, tirando o brilho e causando descolamentos. Sempre use luvas
+                                        de borracha nas tarefas domésticas!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="acc-item">
+                            <button class="acc-header" aria-expanded="false">
+                                <span class="acc-icon" aria-hidden="true">🔄</span>
+                                <span style="flex:1">Quando preciso fazer a manutenção ou o retoque?</span>
+                                <span class="acc-arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <div class="acc-body">
+                                <div class="acc-body-inner">
+                                    <p>O tempo ideal para a manutenção é de 21 a 25 dias, não passando de 30 dias. Mesmo
+                                        que o gel pareça intacto por fora, a sua unha natural cresce por baixo. Isso faz
+                                        com que o "centro de gravidade" do gel se mova para a ponta da unha, deixando a
+                                        base desprotegida e aumentando muito o risco de infiltrações (onde pode entrar
+                                        água e surgir fungos) ou de a unha quebrar dolorosamente no meio.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="acc-item">
+                            <button class="acc-header" aria-expanded="false">
+                                <span class="acc-icon" aria-hidden="true">⚠️</span>
+                                <span style="flex:1">Quais atividades ou hábitos eu devo evitar para não estragar as
+                                    unhas?</span>
+                                <span class="acc-arrow" aria-hidden="true">▾</span>
+                            </button>
+                            <div class="acc-body">
+                                <div class="acc-body-inner">
+                                    <p>O gel é super resistente, mas não é indestrutível.</p>
+                                    <ul>
+                                        <li> Nunca coloque as
+                                            unhas na boca (a saliva é ácida e corrói o gel)</li>
+                                        <li>Evite digitar batendo as
+                                            pontas das unhas com força no teclado. Se você trabalha muito ao computador,
+                                            use
+                                            as polpas dos dedos para digitar.</li>
+                                        <li>Evite usar as unhas como
+                                            ferramentas (para abrir latas de refrigerante, raspar etiquetas, ou apertar
+                                            botões com a ponta dos dedos — use a articulação do dedo).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div>
+                    <p class="section-label">Guia de cuidados</p>
+                    <h2 class="section-title">Cuidados por etapa</h2>
+                    <div class="divider"></div>
+
+                    <!-- Altere style no .care-tip-photo para adicionar a foto -->
+                    <div class="care-tip-card">
+                        <div class="care-tip-photo" style="background-image: url('/unha_antes.png');">
+                            <div class="care-tip-photo-placeholder">
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="care-tip-content">
+                            <span class="care-cat-label">Antes</span>
+                            <h3>Pré-procedimento</h3>
+                            <p> O que fazer: <br> Venha com as mãos limpas, unhas livres de esmalte comum e informe se
+                                tiver
+                                histórico de alergias.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="care-tip-card">
+                        <div class="care-tip-photo" style="background-image: url('/unha_depois.png');">
+                            <div class="care-tip-photo-placeholder">
+
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="care-tip-content">
+                            <span class="care-cat-label" style="background:var(--lilas-claro);">Depois</span>
+                            <h3>Pós-procedimento</h3>
+                            <p>Primeiras horas e dias: <br> O gel sai 100% seco da cabine, mas evite banhos longos e
+                                muito quentes nas primeiras 24 horas.</p>
+                        </div>
+                    </div>
+
+                    <div class="care-tip-card">
+                        <div class="care-tip-photo" style="background-image: url('/unha_flor_1.png');">
+                            <div class="care-tip-photo-placeholder">
+                            </div>
+                        </div>
+                        <div class="care-tip-content">
+                            <span class="care-cat-label" style="background:var(--menta-claro);">Manutenção</span>
+                            <h3>Cuidados em casa</h3>
+                            <p>Hidratação: Use óleo de cutículas diariamente para manter a região bonita e evitar o
+                                descolamento do gel na base. <br>
+
+                                Proteção: Use luvas de borracha ao mexer com produtos de limpeza (cloro, água sanitária)
+                                e nunca use as unhas como ferramentas. <br>
+
+                                Produtos indicados: Prefira removedores sem acetona e use cremes hidratantes específicos
+                                para as mãos no seu dia a dia.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ALERTA IMPORTANTE -->
+        <section class="page-wrapper" style="background: var(--creme);">
+            <div class="container">
+                <div class="alerta">
+                    <p><strong>⚠️ Importante:</strong> Alergias e Cuidados com a Saúde (Dermatite por Acrilatos)
+
+                        Os produtos em gel contêm compostos chamados acrilatos. Embora sejam seguros após a cura
+                        completa na cabine, o contato do produto úmido com a pele pode desencadear reações alérgicas
+                        (que podem surgir no primeiro contato ou após anos de uso contínuo). <br>
+
+                        Os sintomas costumam aparecer ao redor das unhas, nas pálpebras ou no pescoço (regiões que
+                        tocamos frequentemente com as mãos) e incluem: <br>
+
+                        Coceira intensa e vermelhidão (eritema) ao redor das unhas e cutículas. <br>
+
+                        Formação de pequenas bolhas de água (vesículas) nos dedos. <br>
+
+                        Descamação, rachaduras e pele extremamente seca na ponta dos dedos. <br>
+
+                        Sensação de queimação ou latejamento. <br>
+
+                        Em casos graves, descolamento da unha natural (onicólise). <br>
+
+                    </p>
+                </div>
+
+                <div class="alerta" style="border-left-color: var(--menta); background: var(--menta-claro);">
+                    <p><strong>💡 Dica:</strong> O que fazer (Diretriz de Segurança): <br>
+
+                        Suspensão Imediata: Ao menor sinal de irritação, a aplicação do gel deve ser interrompida e o
+                        alongamento deve ser removido de forma segura por uma profissional (nunca arranque em casa).
+                        <br>
+
+                        Consulta Médica: A cliente deve buscar um Médico Dermatologista para realizar um teste de
+                        contato (Patch Test) e indicar o tratamento adequado (geralmente com corticoides tópicos e
+                        hidratação focada). Nunca se automedique. <br>
+
+                        Prevenção: Se você já tem histórico de sensibilidade, informe à profissional. A recomendação
+                        médica é utilizar produtos específicos rotulados como Hipoalergênicos ou HEMA-Free. <br>
+
+                        Compromisso Técnico: Em nosso espaço, garantimos o uso de cabines calibradas e o tempo exato de
+                        exposição para que a cura do gel seja 100% completa, eliminando resíduos químicos livres e
+                        protegendo a sua saúde.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="page-wrapper"
+            style="background: linear-gradient(135deg, var(--rosa-claro), var(--lilas-claro)); text-align:center;">
+            <div class="container" style="max-width:600px;">
+                <h2>Ficou com alguma dúvida?</h2>
+                <p style="margin:1rem 0 2rem;">Me chama! Estou aqui para te orientar antes, durante e depois do
+                    atendimento.</p>
+                <a href="https://wa.me/5599981635627" class="btn btn-primary" target="_blank" rel="noopener">
+                    💬 Falar no WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <footer class="page-wrapper">
+            <div class="container">
+                <p class="nav-logo">MAC Nail Designer</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="servicos.html">Serviços & Preços</a></li>
+                    <li><a href="sobre.html">Sobre Mim</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                    <li><a href="cuidados.html">Cuidados</a></li>
+                </ul>
+                <h6>📍 Rua Benedito Leite, 120 - Porto Franco/MA</h6>
+                <h6>&copy; 2026 MAC Nail Designer. Todos os direitos reservados.</h6>
+                <h6>Desenvolvido por Diego Macedo e Eduardo Tatsuo.</h6>
+            </div>
+        </footer>
+
+        <script src="nav.js"></script>
+        <script>
+            /* ── ACCORDION ── */
+            document.querySelectorAll('.acc-header').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.closest('.acc-item');
+                    const body = item.querySelector('.acc-body');
+                    const isOpen = item.classList.contains('open');
+
+                    /* fecha todos */
+                    document.querySelectorAll('.acc-item').forEach(i => {
+                        i.classList.remove('open');
+                        i.querySelector('.acc-body').style.maxHeight = null;
+                        i.querySelector('.acc-header').setAttribute('aria-expanded', 'false');
+                    });
+
+                    /* abre clicado se estava fechado */
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        body.style.maxHeight = body.scrollHeight + 'px';
+                        btn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+            /* abre o primeiro item por padrão */
+            const primeiro = document.querySelector('.acc-item.open .acc-body');
+            if (primeiro) primeiro.style.maxHeight = primeiro.scrollHeight + 'px';
+
+            /* ── GRID RESPONSIVO SOBRE ── */
+            const twoCol = document.querySelector('section[style*="grid"] .container');
+            if (twoCol) {
+                function adaptGrid() {
+                    twoCol.style.gridTemplateColumns = window.innerWidth < 800 ? '1fr' : '1fr 1fr';
+                }
+                adaptGrid();
+                window.addEventListener('resize', adaptGrid);
+            }
+        </script>
+    </body>
+
+</html>
